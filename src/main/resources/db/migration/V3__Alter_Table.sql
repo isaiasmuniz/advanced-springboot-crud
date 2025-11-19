@@ -1,0 +1,3 @@
+ALTER TABLE advancedcrud
+ADD COLUMN page int NULL,
+ADD COLUMN language VARCHAR(90) NULL;
