@@ -17,7 +17,7 @@ Spring Data JPA
 
 Banco de Dados
 
-MySQL (ou qualquer outro via JPA)
+MySQL
 
 OpenAPI / Swagger 3
 
@@ -25,9 +25,11 @@ JUnit 5
 
 Mockito
 
-Dozzer Mapper
+Dozer Mapper
 
 Maven
+
+Testcontainers
 
 Padrões Seguidos:
 
