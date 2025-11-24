@@ -25,7 +25,7 @@ public class Book implements Serializable {
     @Column(nullable = false, length = 80)
     private double price;
     @Column(nullable = true, length = 80)
-    private int page;
+    private Integer page;
     @Column(nullable = true, length = 80)
     private String language;
 
@@ -40,13 +40,12 @@ public class Book implements Serializable {
         return this;
     }
 
-    public int getPage() {
+    public Integer getPage() {
         return page;
     }
 
-    public Book setPage(int page) {
+    public void setPage(Integer page) {
         this.page = page;
-        return this;
     }
 
     public String getLanguage() {

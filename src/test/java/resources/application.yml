@@ -12,3 +12,6 @@ spring:
         open-in-view: false
 server:
   port: 8888
+loggin:
+  level:
+    DEBUG

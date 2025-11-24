@@ -4,8 +4,7 @@ import advanced_crud_with_spring_boot.controller.BookController;
 import advanced_crud_with_spring_boot.controller.BookControllerv2;
 import advanced_crud_with_spring_boot.dto.BookDTO;
 import advanced_crud_with_spring_boot.dto.BookDtoV2;
-import advanced_crud_with_spring_boot.exception.BadRequestEcpetion;
-import advanced_crud_with_spring_boot.exception.RessourceNotFoundException;
+import advanced_crud_with_spring_boot.exception.ResourceNotFoundException;
 import advanced_crud_with_spring_boot.model.Book;
 import advanced_crud_with_spring_boot.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.logging.Logger;
 
-import static advanced_crud_with_spring_boot.mapper.ObjectMapper.parseObject;
+import static advanced_crud_with_spring_boot.mapper.DozerObjectMapper.parseObject;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
@@ -75,7 +74,7 @@ public class BookService {
     public BookDTO findById(Long id){
         logger.info("find a book by id");
 
-        var entity = repository.findById(id).orElseThrow(() -> new RessourceNotFoundException());
+        var entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException());
         var dto = parseObject(entity, BookDTO.class);
         addHateoasLink(dto);
         return dto;
@@ -84,7 +83,7 @@ public class BookService {
     public BookDtoV2 findByIdV2(Long id){
         logger.info("find by id v2");
 
-        var entity = repository.findById(id).orElseThrow(() -> new RessourceNotFoundException());
+        var entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException());
         var dto = parseObject(entity, BookDtoV2.class);
         addHateoasLinkV2(dto);
         return dto;
@@ -102,7 +101,7 @@ public class BookService {
     public BookDtoV2 createV2(BookDtoV2 bookV2){
         logger.info("creating a book");
 
-        if (bookV2 == null) throw  new RessourceNotFoundException();
+        if (bookV2 == null) throw  new ResourceNotFoundException();
 
         var entity = parseObject(bookV2, Book.class);
         var dto = parseObject(repository.save(entity), BookDtoV2.class);
@@ -113,7 +112,7 @@ public class BookService {
     public BookDTO update(BookDTO bookDTO){
         logger.info("updating book records");
 
-        var entity = repository.findById(bookDTO.getId()).orElseThrow(() -> new RessourceNotFoundException());
+        var entity = repository.findById(bookDTO.getId()).orElseThrow(() -> new ResourceNotFoundException());
         entity.setAuthorName(bookDTO.getAuthorName());
         entity.setTitle(bookDTO.getTitle());
         entity.setLaunchDate(bookDTO.getLaunchDate());
@@ -127,10 +126,10 @@ public class BookService {
     public BookDtoV2 updateV2(BookDtoV2 bookV2){
         logger.info("updating a v2 book");
 
-        if (bookV2 == null) throw  new RessourceNotFoundException();
+        if (bookV2 == null) throw  new ResourceNotFoundException();
 
 
-        var entity = repository.findById(bookV2.getId()).orElseThrow(() -> new RessourceNotFoundException());
+        var entity = repository.findById(bookV2.getId()).orElseThrow(() -> new ResourceNotFoundException());
         entity.setTitle(entity.getTitle());
         entity.setLanguage(bookV2.getLanguage());
         entity.setPrice(bookV2.getPrice());
@@ -145,7 +144,7 @@ public class BookService {
 
     public void delete(Long id){
         logger.info("deleting a book");
-        var entity = repository.findById(id).orElseThrow(() -> new RessourceNotFoundException());
+        var entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException());
         repository.delete(entity);
     }
 

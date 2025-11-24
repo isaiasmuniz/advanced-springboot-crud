@@ -16,7 +16,7 @@ public class BookDtoV2 extends RepresentationModel<BookDtoV2> implements Seriali
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate launchDate;
     private double price;
-    private int page;
+    private Integer page;
     private String language;
 
     public BookDtoV2() {}
@@ -66,13 +66,12 @@ public class BookDtoV2 extends RepresentationModel<BookDtoV2> implements Seriali
         return this;
     }
 
-    public int getPage() {
+    public Integer getPage() {
         return page;
     }
 
-    public BookDtoV2 setPage(int page) {
+    public void setPage(Integer page) {
         this.page = page;
-        return this;
     }
 
     public String getLanguage() {

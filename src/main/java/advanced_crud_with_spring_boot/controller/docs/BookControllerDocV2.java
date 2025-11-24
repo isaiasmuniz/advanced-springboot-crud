@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 public interface BookControllerDocV2 {
-    @Operation(summary = "Find all books", description = "Finds all books", tags = "books", responses = {
+    @Operation(summary = "Find all books with page and language", description = "Finds all books", tags = "books", responses = {
             @ApiResponse(description = "Success", responseCode = "200", content = {
                     @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, array = @ArraySchema(schema = @Schema(implementation = BookDtoV2.class)))
             }),
@@ -32,7 +32,7 @@ public interface BookControllerDocV2 {
             @RequestParam(value = "direction", defaultValue = "asc") String direction
     );
 
-   @Operation(summary = "Find by id", description = "Finds a book by their id", tags = "books", responses = {
+   @Operation(summary = "Find by id with page and language", description = "Finds a book by their id", tags = "books", responses = {
             @ApiResponse(description = "Success", responseCode = "200", content = {
                     @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, array = @ArraySchema(schema = @Schema(implementation = BookDtoV2.class)))
             }),
@@ -44,7 +44,7 @@ public interface BookControllerDocV2 {
     })
    BookDtoV2 findByIdV2(@PathVariable("id") Long id);
 
-    @Operation(summary = "Create a book", description = "Updating records of book", tags = "books", responses = {
+    @Operation(summary = "Create a book with page and language", description = "Updating records of book", tags = "books", responses = {
             @ApiResponse(description = "Sucess", responseCode = "200", content = {
                     @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, array = @ArraySchema(schema = @Schema(implementation = BookDtoV2.class)))
             }),
@@ -56,7 +56,7 @@ public interface BookControllerDocV2 {
     })
     BookDtoV2 createV2(@RequestBody BookDtoV2 bookDTO);
 
-   @Operation(summary = "Update a book", description = "Updating records of book", tags = "books", responses = {
+   @Operation(summary = "Update a book with page and language", description = "Updating records of book", tags = "books", responses = {
             @ApiResponse(description = "Sucess", responseCode = "200", content = {
                     @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, array = @ArraySchema(schema = @Schema(implementation = BookDtoV2.class)))
             }),

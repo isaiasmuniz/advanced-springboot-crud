@@ -14,14 +14,14 @@ import java.util.stream.Stream;
 @ContextConfiguration(initializers = AbstractionIntegrationTest.Initializer.class)
 public class AbstractionIntegrationTest {
 
-    static class Initializer implements ApplicationContextInitializer<ConfigurableApplicationContext>{
+    static class Initializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
         static MySQLContainer<?> mySQLContainer = new MySQLContainer<>("mysql:9.1.0");
 
-        private static void startContainers(){
+        private static void startContainer(){
             Startables.deepStart(Stream.of(mySQLContainer)).join();
         }
 
-        private static Map<String, String> createConnectionConfiguration(){
+        private static Map<String, String> createConnectionConfigure(){
             return Map.of(
                     "spring.datasource.url", mySQLContainer.getJdbcUrl(),
                     "spring.datasource.username", mySQLContainer.getUsername(),
@@ -32,10 +32,11 @@ public class AbstractionIntegrationTest {
 
         @Override
         public void initialize(ConfigurableApplicationContext applicationContext) {
-            startContainers();
-            ConfigurableEnvironment environmen = applicationContext.getEnvironment();
-            MapPropertySource testecontainers =  new MapPropertySource("testecontainers", (Map) createConnectionConfiguration());
-            environmen.getPropertySources().addFirst(testecontainers);
+            startContainer();
+            ConfigurableEnvironment environment = applicationContext.getEnvironment();
+            MapPropertySource testcontainers =  new MapPropertySource("testcontainers", (Map) createConnectionConfigure());
+            environment.getPropertySources().addFirst(testcontainers);
         }
+
     }
 }
